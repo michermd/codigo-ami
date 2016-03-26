@@ -50,7 +50,7 @@ post "/login" do
   # si es válido el usuario: te manda a?
   # si no te regresa a /login?fail=true
   
-  if params[:usuario] == "eldoc" && params[:password] == "asdf"
+  if params[:usuario] == ENV['APP_USERNAME'] && params[:password] == ENV['APP_PASSWORD']
     session[:usuario] = true
     redirect to "/emergency"
   else
