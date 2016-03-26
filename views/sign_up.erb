@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sign Up</title>
+</head>
+<body>
+	<h1>Codigo AMI</h1>
+	<h3>Por favor ingresa tus datos</h3>
+	<em>Nota: Todos los campos son requeridos</em>
+</body>
+<br />
+  
+<form action="/sign_up" method="POST">
+	
+	<label for="usuario">Nombre de Usuario</label>
+	<input id="usuario" name="usuario" type="text" placeholder="Nombre de Usuario" required="" />	
+	<br />
+
+	<label for="pass1">Escribe un Password</label>
+	<input id="pass1" type="password" name="password" placeholder="Password" minlength="8" maxlength="40" required=""/>
+  <br />
+
+  <label for="pass2">Confirma tu password</label>
+  <input id="pass2" type="password" name="ConfirmPass" placeholder="Confirma tu Password"> <br />
+
+
+  	<p><em>El Password debe de ser al menos de ocho caracteres y un símbolo</em></p>
+
+  	<script>
+    function myFunction() {
+        var pass1 = document.getElementById("pass1").value;
+        var pass2 = document.getElementById("pass2").value;
+        if (pass1 != pass2) {
+            //alert("Passwords Do not match");
+            document.getElementById("pass1").style.borderColor = "#E34234";
+            document.getElementById("pass2").style.borderColor = "#E34234";
+        }
+        else {
+            alert("Passwords Match!!!");
+        }
+    }
+		</script>
+
+	<label for="telephone">Teléfono</label>
+	<input id="telephone" name="telephone" type="tel" placeholder="(55)5555-5555" required="" minlength="10" maxlength="10" />
+	<br />
+
+	<label for="user_type" name="Tipo de Usuario" type="checkbox">Tipo de Usuario</label>
+  	<select name="user_type" required="">
+  		
+  		<option value=""></option>
+  		<option value="team_leader">Team Leader</option>
+      <option value="team_cardio">Cardiólogo</option>
+      <option value="team_hx">Hemodinamista</option>
+  		<option value="team_er">Medico de urgencias</option>
+	</select>
+	<br />
+
+	<button type="submit">Inicia Sesión</button>
+
+</form>
+</html>
