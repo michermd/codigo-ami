@@ -2,6 +2,27 @@ require "rubygems"
 require "bundler"
 
 
+Bundler.require
+
+configure do
+  db = Sequel.connect('sqlite://db.db')
+
+  db.create_table? :user do
+    primary_key   :id
+
+    String    :user_name
+    String    :password
+    String    :nombre
+    String    :apellido_paterno
+    String    :apellido_materno
+    String    :email
+    String    :user_type
+    String    :phone
+  end
+
+  set :db, db
+end
+
 enable :sessions
 
 
@@ -28,7 +49,13 @@ end
 post "/sign_up" do
   #se verifica el registro y se crea el usuario
   # redirigimos el usuario a iniciar sesión
-  # este_usuario = User.new(params)
+  data = params
+  data[:password] = BCrypt::Password.create(data[:pass1])
+
+  dbu = settings.db[:user]
+  user = dbu.insert(data)
+
+
 end
 
 get "/login" do
@@ -44,8 +71,11 @@ post "/login" do
   # si es válido el usuario: te manda a?
   # si no te regresa a /login?fail=true
   
-  if params[:usuario] == ENV['APP_USERNAME'] && params[:password] == ENV['APP_PASSWORD']
-    session[:usuario] = true
+  dbu = settings.db[:user]
+  user = dbu.filter({email: params[:user_name]}).first
+
+  if user_name && BCrypt::Password.new(user_name.password) == params[:password]
+    session[:user_name] = user_name
     redirect to "/emergency"
   else
     redirect to "/login"
@@ -57,7 +87,7 @@ get "/emergency" do
 
   # muestra botón para crear emergency
   
-  unless session[:usuario]
+  unless session[:user_name]
     return redirect to "/login"
   end
 
