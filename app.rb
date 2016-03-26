@@ -1,15 +1,9 @@
-require "sinatra"
+require "rubygems"
+require "bundler"
+
 
 enable :sessions
 
-class User
-    def initialize(data)
-        @user_id = data[:user_id]
-        @user_type = data[:user_type]
-        @user_name = data[:user_name]
-        @password = data[:password]
-    end
-end
 
 get "/" do
   # Splash page: muestra que hace la aplicación

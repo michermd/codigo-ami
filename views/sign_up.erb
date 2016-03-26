@@ -21,38 +21,39 @@
   <br />
 
   <label for="pass2">Confirma tu password</label>
-  <input id="pass2" type="password" name="ConfirmPass" placeholder="Confirma tu Password"> <br />
+  <input id="pass2" type="password" onchange="javascript:myFunction()" name="ConfirmPass" placeholder="Confirma tu Password"> <br />
 
 
-  	<p><em>El Password debe de ser al menos de ocho caracteres y un símbolo</em></p>
+  <p><em>El Password debe de ser al menos de ocho caracteres y un símbolo</em></p>
 
-  	<script>
+  <script>
     function myFunction() {
         var pass1 = document.getElementById("pass1").value;
         var pass2 = document.getElementById("pass2").value;
         if (pass1 != pass2) {
-            //alert("Passwords Do not match");
-            document.getElementById("pass1").style.borderColor = "#E34234";
-            document.getElementById("pass2").style.borderColor = "#E34234";
-        }
-        else {
-            alert("Passwords Match!!!");
+          //alert("Passwords Do not match");
+          document.getElementById("pass1").style.borderColor = "#E34234";
+          document.getElementById("pass2").style.borderColor = "#E34234";
+        } else {
+          alert("Passwords Match!!!");
         }
     }
-		</script>
+	</script>
 
-	<label for="telephone">Teléfono</label>
-	<input id="telephone" name="telephone" type="tel" placeholder="(55)5555-5555" required="" minlength="10" maxlength="10" />
+	<label for="phone">Teléfono</label>
+	<input id="phone" name="phone" type="tel" placeholder="(55)5555-5555" required="" minlength="10" maxlength="10" />
 	<br />
 
 	<label for="user_type" name="Tipo de Usuario" type="checkbox">Tipo de Usuario</label>
   	<select name="user_type" required="">
-  		
-  		<option value=""></option>
-  		<option value="team_leader">Team Leader</option>
-      <option value="team_cardio">Cardiólogo</option>
-      <option value="team_hx">Hemodinamista</option>
-  		<option value="team_er">Medico de urgencias</option>
+  		<optgroup label="user_type">
+        <option>Escoge el tipo de usuario</option>
+      </optgroup>
+  		  <option value=""></option>
+  		  <option value="team_leader">Team Leader</option>
+        <option value="team_cardio">Cardiólogo</option>
+        <option value="team_hx">Hemodinamista</option>
+  		  <option value="team_er">Medico de urgencias</option>
 	</select>
 	<br />
 
