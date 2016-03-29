@@ -10,49 +10,65 @@
 </body>
 <br />
   
-<form action="/sign_up" method="POST">
+<form action="/sign_up" method = "POST">
 	
-	<label for="usuario">Nombre de Usuario</label>
-	<input id="usuario" name="usuario" type="text" placeholder="Nombre de Usuario" required="" />	
-	<br />
-
-	<label for="pass1">Escribe un Password</label>
-	<input id="pass1" type="password" name="password" placeholder="Password" minlength="8" maxlength="40" required=""/>
+	<label for = "name">Nombre</label>
+  <input id = "name" name = "name" type = "text" placeholder = "Nomre" required = "" />
   <br />
 
-  <label for="pass2">Confirma tu password</label>
-  <input id="pass2" type="password" onchange="javascript:myFunction()" name="ConfirmPass" placeholder="Confirma tu Password"> <br />
+  <label for = "lastname1">Primer Apellido</label>
+  <input id = "lastname1" lastname1 = "lastname1" type = "text" placeholder = "Primer Apellido" required = "" />
+  <br />
 
+  <label for = "lastname2">Segundo Apellido</label>
+  <input id = "lastname2" lastname2 = "lastname2" type = "text" placeholder = "Segundo Apellido" />
+  <br />
+
+  <label for = "user_name">Nombre de Usuario</label>
+	<input id = "user_name" name = "user_name" type = "text" placeholder = "Nombre de Usuario" required = "" />
+	<br />
+
+	<label for = "pass1">Escribe un Password</label>
+	<input id = "pass1" type = "password" name = "password" placeholder = "Password" minlength = "8" maxlength = "40" required = ""/>
+  <br />
+
+  <label for = "pass2">Confirma tu password</label>
+  <input id = "pass2" type = "password" onchange = "javascript:myFunction()" name = "pass2" placeholder = "Confirma tu Password">
+  <br />
 
   <p><em>El Password debe de ser al menos de ocho caracteres y un símbolo</em></p>
 
   <script>
-    function myFunction() {
+    function myFunction () {
         var pass1 = document.getElementById("pass1").value;
         var pass2 = document.getElementById("pass2").value;
         if (pass1 != pass2) {
-          //alert("Passwords Do not match");
+          alert("Las contraseñas no son iguales");
           document.getElementById("pass1").style.borderColor = "#E34234";
           document.getElementById("pass2").style.borderColor = "#E34234";
         } else {
-          alert("Passwords Match!!!");
+          alert("Las contraseñas coinciden!!!");
         }
     }
 	</script>
 
-	<label for="phone">Teléfono</label>
-	<input id="phone" name="phone" type="tel" placeholder="(55)5555-5555" required="" minlength="10" maxlength="10" />
+  <label for = "email">email </label>
+  <input id = "email" email = "email" type = "email" placeholder = "doctor@abc.com" required = "" />
+  <br />
+
+	<label for = "phone">Teléfono</label>
+	<input id = "phone" name = "phone" type = "tel" placeholder = "(55)5555-5555" required = "" minlength = "10" maxlength = "10" />
 	<br />
 
-	<label for="user_type" name="Tipo de Usuario" type="checkbox">Tipo de Usuario</label>
-  	<select name="user_type" required="">
-  		<optgroup label="user_type">
-        <option>Escoge el tipo de usuario</option>
-      </optgroup>
-  		  <option value="team_leader">Team Leader</option>
-        <option value="team_cardio">Cardiólogo</option>
-        <option value="team_hx">Hemodinamista</option>
-  		  <option value="team_er">Medico de urgencias</option>
+	<label for = "user_type" name = "user_type" type = "checkbox">Tipo de Usuario</label>
+	<select name = "user_type" required = "">
+		<optgroup label = "user_type">
+      <option>Escoge el tipo de usuario</option>
+    </optgroup>
+		  <option value = "team_leader">Team Leader</option>
+      <option value = "team_cardio">Cardiólogo</option>
+      <option value = "team_hx">Hemodinamista</option>
+		  <option value = "team_er">Medico de urgencias</option>
 	</select>
 	<br />
 

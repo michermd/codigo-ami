@@ -10,17 +10,18 @@ configure do
   db.create_table? :user do
     primary_key   :id
 
+    String    :name
+    String    :lastname1
+    String    :lastname2
     String    :user_name
     String    :password
-    String    :nombre
-    String    :apellido_paterno
-    String    :apellido_materno
     String    :email
-    String    :user_type
     String    :phone
+    String    :user_type
   end
 
   set :db, db
+  
 end
 
 enable :sessions
@@ -53,7 +54,7 @@ post "/sign_up" do
   data[:password] = BCrypt::Password.create(data[:pass1])
 
   dbu = settings.db[:user]
-  user = dbu.insert(data)
+  user_name = dbu.insert(data)
 
 
 end
@@ -67,15 +68,15 @@ get "/login" do
 end
 
 post "/login" do
-  #el sistema veifica los datos del login
-  # si es válido el usuario: te manda a?
+  # el sistema veifica los datos del login
+  # si es válido el usuario: te manda selección de team
   # si no te regresa a /login?fail=true
   
   dbu = settings.db[:user]
-  user = dbu.filter({email: params[:user_name]}).first
+  user_name = dbu.filter({email: params[:user_name]}).first
 
   if user_name && BCrypt::Password.new(user_name.password) == params[:password]
-    session[:user_name] = user_name
+    session[:user] = user
     redirect to "/emergency"
   else
     redirect to "/login"
@@ -87,7 +88,7 @@ get "/emergency" do
 
   # muestra botón para crear emergency
   
-  unless session[:user_name]
+  unless session[:user]
     return redirect to "/login"
   end
 
