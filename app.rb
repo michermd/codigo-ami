@@ -1,5 +1,6 @@
 require "rubygems"
 require "bundler"
+Bundler.require
 
 
 enable :sessions
@@ -43,7 +44,7 @@ post "/login" do
   #el sistema veifica los datos del login
   # si es válido el usuario: te manda a?
   # si no te regresa a /login?fail=true
-  
+
   if params[:usuario] == ENV['APP_USERNAME'] && params[:password] == ENV['APP_PASSWORD']
     session[:usuario] = true
     redirect to "/emergency"
@@ -56,7 +57,7 @@ end
 get "/emergency" do
 
   # muestra botón para crear emergency
-  
+
   unless session[:usuario]
     return redirect to "/login"
   end
@@ -64,7 +65,7 @@ get "/emergency" do
   <<-HTML
   Si pudimos!!!!
   HTML
-  
+
 end
 
 post "/emergency" do
@@ -94,7 +95,7 @@ get "/teams" do
 end
 
 get "/teams/members" do
-  #se puede agregar integrantes del equipo 
+  #se puede agregar integrantes del equipo
   #(hemodinamista (1), segundo operador (1-2), anestesiólogo(1))
 end
 
