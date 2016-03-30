@@ -11,8 +11,7 @@ configure do
     primary_key   :id
 
     String    :name
-    String    :lastname1
-    String    :lastname2
+    String    :lastname
     String    :user_name
     String    :password
     String    :email
@@ -54,8 +53,8 @@ post "/sign_up" do
   data[:password] = BCrypt::Password.create(data[:pass1])
 
   dbu = settings.db[:user]
-  user_name = dbu.insert(data)
-
+  dbu.insert(data)
+    lastname.delete
 
 end
 
@@ -64,7 +63,6 @@ get "/login" do
   #formulario de username y password con boton de submit
 
   erb :login
-
 end
 
 post "/login" do
@@ -73,9 +71,9 @@ post "/login" do
   # si no te regresa a /login?fail=true
   
   dbu = settings.db[:user]
-  user_name = dbu.filter({email: params[:user_name]}).first
+  user = dbu.filter({user_name: params[:user_name]}).first
 
-  if user_name && BCrypt::Password.new(user_name.password) == params[:password]
+  if user && BCrypt::Password.new(user.password) == params[:password]
     session[:user] = user
     redirect to "/emergency"
   else
