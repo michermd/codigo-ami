@@ -6,7 +6,11 @@
 <body>
 	<h1>Codigo AMI</h1>
 	<h2>Por favor introduce tu usario y contraseña</h2>
-</body>
+
+	<% if error %>
+	<p class="error">No existe su nombre de usuario o su contraseña es incorrecta</p>
+	<% end %>
+
 	<form action="/login" method="POST">
 	
 		<label for="user_name">Nombre de Usuario</label>
@@ -21,6 +25,5 @@
 		<button type="submit">Inicia Sesión</button>
 	<br/>
 </form>
-
+</body>
 </html>
-
