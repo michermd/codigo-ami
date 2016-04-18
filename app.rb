@@ -70,7 +70,6 @@ post "/sign_up" do
   else
     redirect to "/login"
   end
-  
 end
 
 
