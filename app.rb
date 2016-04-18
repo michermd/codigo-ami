@@ -21,7 +21,7 @@ configure do
   end
 
   set :db, db
-  
+  set :twilio, YAML.load(File.open("./twilio.yaml").read)
 end
 
 enable :sessions
@@ -60,6 +60,8 @@ post "/sign_up" do
   data[:password] = BCrypt::Password.create(params[:pass1])
   data.delete 'pass1'
   data.delete 'pass2'
+
+  # TODO: Dar formato especifico al numero de telefono
 
   dbu = settings.db[:users]
 
@@ -123,6 +125,14 @@ post "/emergency" do
   #se mandan SMS a team
   #se verifica respuesta de team leader
 
+  rcpt = "?"
+  client = Twilio::REST::Client.new settings.twilio[:sid], settings.twilio[:token]
+  sms = {
+    from: settings.twilio[:number],
+    to: rcpt,
+    body: "Las clases del Rob están dando frutos"
+  }
+  client.account.messages.create(sms)
 end
 
 =begin
