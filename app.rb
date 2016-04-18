@@ -1,5 +1,6 @@
 require "rubygems"
 require "bundler"
+Bundler.require
 
 
 Bundler.require
@@ -105,15 +106,12 @@ end
 
 get "/emergency" do
   # muestra botón para crear emergency
-  
-  unless session[:user]
-    return redirect to "/login"
-  end
+  return redirect to "/login" unless session[:user]
 
   <<-HTML
   Si pudimos!!!!
   HTML
-  
+
 end
 
 post "/emergency" do
@@ -143,7 +141,7 @@ get "/teams" do
 end
 
 get "/teams/members" do
-  #se puede agregar integrantes del equipo 
+  #se puede agregar integrantes del equipo
   #(hemodinamista (1), segundo operador (1-2), anestesiólogo(1))
 end
 
