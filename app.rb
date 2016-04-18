@@ -109,14 +109,11 @@ end
 get "/emergency" do
   # muestra botón para crear emergency
   return redirect to "/login" unless session[:user]
-
-  <<-HTML
-  Si pudimos!!!!
-  HTML
-
+  # TODO: mostrar lista de team leaders en un drop box de base de datos
 end
 
 post "/emergency" do
+  return redirect to "/login" unless session[:user]
   #se verifica que se declaró un codigo_ami
   #boton de cancelar codigo_ami
   #muestra pantalla para seleccionar el team
@@ -124,6 +121,8 @@ post "/emergency" do
   #Boton para notificar al team con SMS
   #se mandan SMS a team
   #se verifica respuesta de team leader
+
+    # TODO: Obtener usuario de params[:user]
 
   rcpt = "?"
   client = Twilio::REST::Client.new settings.twilio[:sid], settings.twilio[:token]
@@ -135,36 +134,3 @@ post "/emergency" do
   client.account.messages.create(sms)
 end
 
-=begin
-
-get "/emergency/aceptar" do
-  #solo lo puede aceptar doctor
-  #cuando se acepta, se notifica a team
-end
-
-get "/emergency/rechazar" do
-  #cuando el usuario rechaza el team no es notificado
-end
-
-get "/teams" do
-  #nos da los integrantes del equipo
-end
-
-get "/teams/members" do
-  #se puede agregar integrantes del equipo
-  #(hemodinamista (1), segundo operador (1-2), anestesiólogo(1))
-end
-
-get "/teams/members/new" do
-  # te muestra formulario de invitación a miembro nuevo
-end
-
-post "/teams/members/new" do
-  # crea una invitación a un miembro nuevo
-  # y la manda por mail
-end
-
-get "/emergency/:paciente" do |paciente|
-
-end
-=end
