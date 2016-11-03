@@ -1,8 +1,6 @@
 require "rubygems"
 require "bundler"
-Bundler.require
-
-
+require "yaml"
 Bundler.require
 
 configure do
@@ -22,6 +20,7 @@ configure do
 
   set :db, db
   set :twilio, YAML.load(File.open("./twilio.yaml").read)
+  set :session_secret, "dyydofew9fykdhfskdf 6587"
 end
 
 enable :sessions
@@ -46,8 +45,6 @@ get "/sign_up" do
   erb :sign_up
 end
 
-
-
 post "/sign_up" do
   #se verifica el registro y se crea el usuario
   # redirigimos el usuario a iniciar sesión
@@ -71,20 +68,20 @@ post "/sign_up" do
     puts e
     return "Ese nombre de usuario ya existe"
   else
-    redirect to "/login"
+    redirect to "/login?success=true"
   end
 end
-
 
 
 get "/login" do
   #el usuario se registra con sus datos
   #formulario de username y password con boton de submit
 
-  erb :login, locals: {error: params[:error]}
+  erb :login, locals: {
+    error: params[:error],
+    success: params[:success]
+  }
 end
-
-
 
 post "/login" do
   # el sistema veifica los datos del login
@@ -94,6 +91,8 @@ post "/login" do
   dbu = settings.db[:users]
   user = dbu.filter({user_name: params[:user_name]}).first
 
+  return redirect(to "/login?error=true") if user.nil?
+  
   puts user[:password]
 
   if user && BCrypt::Password.new(user[:password]) == params[:password]
@@ -122,7 +121,7 @@ post "/emergency" do
   #se mandan SMS a team
   #se verifica respuesta de team leader
 
-    # TODO: Obtener usuario de params[:user]
+  # TODO: Obtener usuario de params[:user]
 
   rcpt = "?"
   client = Twilio::REST::Client.new settings.twilio[:sid], settings.twilio[:token]

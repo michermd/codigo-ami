@@ -11,6 +11,10 @@
 	<p class="error">No existe su nombre de usuario o su contraseña es incorrecta</p>
 	<% end %>
 
+	<% if success %>
+	<p class="success">Su registro se ha realizado con exito</p>
+	<% end %>
+
 	<form action="/login" method="POST">
 	
 		<label for="user_name">Nombre de Usuario</label>
